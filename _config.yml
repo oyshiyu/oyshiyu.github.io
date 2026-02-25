@@ -5,10 +5,12 @@ url: "https://oyshiyu.github.io"
 baseurl: ""
 timezone: "Asia/Shanghai"
 
-author:
-  name: "oyshiyu"
+author: "oyshiyu"
 
 theme: minima
+
+minima:
+  date_format: "%Y-%m-%d"
 
 plugins:
   - jekyll-feed
@@ -31,4 +33,3 @@ defaults:
 
 exclude:
   - README.md
-

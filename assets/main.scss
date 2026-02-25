@@ -473,6 +473,10 @@ a:hover {
   font-size: 0.92rem;
 }
 
+.rss-subscribe {
+  display: none;
+}
+
 .archive-shell,
 .about-shell,
 .taxonomy-shell {
@@ -803,4 +807,3 @@ a:hover {
     grid-template-columns: 1fr;
   }
 }
-
