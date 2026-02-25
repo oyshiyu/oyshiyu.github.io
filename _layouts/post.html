@@ -1,0 +1,43 @@
+---
+layout: default
+---
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <p class="post-kicker">Article</p>
+    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    <p class="post-meta">
+      {%- assign date_format = site.minima.date_format | default: "%Y-%m-%d" -%}
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {{ page.date | date: date_format }}
+      </time>
+      {%- if page.author -%}
+        <span class="meta-sep">·</span>
+        <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <span class="p-author h-card" itemprop="name">{{ page.author }}</span>
+        </span>
+      {%- endif -%}
+    </p>
+    {%- if page.description -%}
+      <p class="post-description">{{ page.description }}</p>
+    {%- endif -%}
+
+    {%- assign category_count = page.categories | size -%}
+    {%- assign tag_count = page.tags | size -%}
+    {%- if category_count > 0 or tag_count > 0 -%}
+      <div class="post-taxonomy" aria-label="文章分类与标签">
+        {%- for category in page.categories -%}
+          <span class="meta-chip meta-chip--accent">分类 · {{ category }}</span>
+        {%- endfor -%}
+        {%- for tag in page.tags -%}
+          <span class="meta-chip meta-chip--warm">#{{ tag }}</span>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    {{ content }}
+  </div>
+
+  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+</article>
