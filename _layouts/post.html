@@ -1,43 +1,146 @@
 ---
 layout: default
 ---
-<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+{%- assign date_format = site.minima.date_format | default: "%Y-%m-%d" -%}
+{%- assign plain_text = content | strip_html | strip_newlines | replace: " ", "" | replace: "	", "" -%}
+{%- assign char_count = plain_text | size -%}
+{%- assign reading_minutes = char_count | plus: 399 | divided_by: 400 -%}
+{%- if reading_minutes < 1 -%}{%- assign reading_minutes = 1 -%}{%- endif -%}
+{%- assign category_count = page.categories | size -%}
+{%- assign tag_count = page.tags | size -%}
+<article class="post h-entry" id="top" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
-    <p class="post-kicker">Article</p>
-    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
-    <p class="post-meta">
-      {%- assign date_format = site.minima.date_format | default: "%Y-%m-%d" -%}
-      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {{ page.date | date: date_format }}
-      </time>
-      {%- if page.author -%}
-        <span class="meta-sep">·</span>
-        <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <span class="p-author h-card" itemprop="name">{{ page.author }}</span>
-        </span>
-      {%- endif -%}
-    </p>
-    {%- if page.description -%}
-      <p class="post-description">{{ page.description }}</p>
-    {%- endif -%}
+    <div class="post-head-grid">
+      <div class="post-head-main">
+        <p class="post-kicker">Article</p>
+        <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+        <p class="post-meta">
+          <span class="post-meta-item">
+            <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+              {{ page.date | date: date_format }}
+            </time>
+          </span>
+          {%- if page.author -%}
+            <span class="meta-sep">·</span>
+            <span class="post-meta-item" itemprop="author" itemscope itemtype="http://schema.org/Person">
+              <span class="p-author h-card" itemprop="name">{{ page.author }}</span>
+            </span>
+          {%- endif -%}
+          <span class="meta-sep">·</span>
+          <span class="post-meta-item">{{ reading_minutes }} 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span class="post-meta-item">约 {{ char_count }} 字符</span>
+          {%- if page.updated -%}
+            <span class="meta-sep">·</span>
+            <span class="post-meta-item">更新于 {{ page.updated | date: date_format }}</span>
+          {%- endif -%}
+        </p>
+        {%- if page.description -%}
+          <p class="post-description">{{ page.description }}</p>
+        {%- endif -%}
 
-    {%- assign category_count = page.categories | size -%}
-    {%- assign tag_count = page.tags | size -%}
-    {%- if category_count > 0 or tag_count > 0 -%}
-      <div class="post-taxonomy" aria-label="文章分类与标签">
-        {%- for category in page.categories -%}
-          <span class="meta-chip meta-chip--accent">分类 · {{ category }}</span>
-        {%- endfor -%}
-        {%- for tag in page.tags -%}
-          <span class="meta-chip meta-chip--warm">#{{ tag }}</span>
-        {%- endfor -%}
+        {%- if category_count > 0 or tag_count > 0 -%}
+          <div class="post-taxonomy" aria-label="文章分类与标签">
+            {%- for category in page.categories -%}
+              <span class="meta-chip meta-chip--accent">分类 · {{ category }}</span>
+            {%- endfor -%}
+            {%- for tag in page.tags -%}
+              <span class="meta-chip meta-chip--warm">#{{ tag }}</span>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
       </div>
+
+      <aside class="post-facts-card" aria-label="文章信息">
+        <h2>文章信息</h2>
+        <dl class="post-facts">
+          <div>
+            <dt>发布时间</dt>
+            <dd>{{ page.date | date: date_format }}</dd>
+          </div>
+          {%- if page.updated -%}
+          <div>
+            <dt>更新时间</dt>
+            <dd>{{ page.updated | date: date_format }}</dd>
+          </div>
+          {%- endif -%}
+          <div>
+            <dt>阅读时长</dt>
+            <dd>{{ reading_minutes }} 分钟</dd>
+          </div>
+          <div>
+            <dt>内容长度</dt>
+            <dd>约 {{ char_count }} 字符</dd>
+          </div>
+          <div>
+            <dt>分类数</dt>
+            <dd>{{ category_count }}</dd>
+          </div>
+          <div>
+            <dt>标签数</dt>
+            <dd>{{ tag_count }}</dd>
+          </div>
+        </dl>
+      </aside>
+    </div>
+
+    {%- if page.cover -%}
+      <figure class="post-cover">
+        <img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title | escape }}" itemprop="image">
+        {%- if page.cover_caption -%}
+          <figcaption>{{ page.cover_caption }}</figcaption>
+        {%- endif -%}
+      </figure>
     {%- endif -%}
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
     {{ content }}
   </div>
+
+  <footer class="post-footer">
+    <section class="post-end-card" aria-label="文章操作">
+      <div>
+        <p class="post-end-kicker">End Of Article</p>
+        <h2>读完了这篇文章</h2>
+        <p>可以回到博客继续浏览，也可以跳到文首检查前文内容。</p>
+      </div>
+      <div class="post-end-actions">
+        <a class="btn-pill" href="{{ '/blog/' | relative_url }}">返回博客</a>
+        <a class="btn-pill btn-pill--ghost" href="#top">回到顶部</a>
+      </div>
+    </section>
+
+    {%- if page.previous or page.next -%}
+      <nav class="post-neighbors" aria-label="相邻文章导航">
+        {%- if page.previous -%}
+          <a class="neighbor-card" href="{{ page.previous.url | relative_url }}">
+            <span class="neighbor-card__label">上一篇</span>
+            <strong class="neighbor-card__title">{{ page.previous.title }}</strong>
+            <span class="neighbor-card__meta">{{ page.previous.date | date: date_format }}</span>
+          </a>
+        {%- else -%}
+          <div class="neighbor-card neighbor-card--empty" aria-hidden="true">
+            <span class="neighbor-card__label">上一篇</span>
+            <strong class="neighbor-card__title">暂无</strong>
+          </div>
+        {%- endif -%}
+
+        {%- if page.next -%}
+          <a class="neighbor-card neighbor-card--next" href="{{ page.next.url | relative_url }}">
+            <span class="neighbor-card__label">下一篇</span>
+            <strong class="neighbor-card__title">{{ page.next.title }}</strong>
+            <span class="neighbor-card__meta">{{ page.next.date | date: date_format }}</span>
+          </a>
+        {%- else -%}
+          <div class="neighbor-card neighbor-card--empty" aria-hidden="true">
+            <span class="neighbor-card__label">下一篇</span>
+            <strong class="neighbor-card__title">暂无</strong>
+          </div>
+        {%- endif -%}
+      </nav>
+    {%- endif -%}
+  </footer>
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>
