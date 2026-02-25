@@ -1,0 +1,34 @@
+title: "oyshiyu 的博客"
+description: "记录技术实践、研究笔记与项目思考。"
+lang: "zh-CN"
+url: "https://oyshiyu.github.io"
+baseurl: ""
+timezone: "Asia/Shanghai"
+
+author:
+  name: "oyshiyu"
+
+theme: minima
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+header_pages:
+  - index.md
+  - archive.md
+  - about.md
+
+show_excerpts: true
+permalink: /:year/:month/:day/:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+exclude:
+  - README.md
+

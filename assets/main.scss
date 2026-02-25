@@ -1,0 +1,22 @@
+---
+---
+$base-font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+$code-font-family: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+$content-width: 900px;
+$base-line-height: 1.75;
+
+@import "minima";
+
+.site-title {
+  font-weight: 700;
+}
+
+.post-content p,
+.page-content p {
+  text-wrap: pretty;
+}
+
+.post-list li {
+  margin-bottom: 0.5rem;
+}
+
