@@ -24,6 +24,8 @@ $grey-color: #68707d;
   --line-strong: rgba(34, 41, 47, 0.2);
   --accent: #0f766e;
   --accent-2: #c2410c;
+  --link: #0f766e;
+  --link-hover: #0b5b55;
   --shadow-soft: 0 18px 45px rgba(36, 40, 46, 0.08);
   --shadow-strong: 0 30px 80px rgba(22, 25, 30, 0.12);
   --radius-lg: 22px;
@@ -73,14 +75,16 @@ body::after {
   background: rgba(194, 65, 12, 0.06);
 }
 
-a {
-  color: var(--accent);
+a,
+a:visited {
+  color: var(--link);
   text-decoration-color: rgba(15, 118, 110, 0.35);
   text-underline-offset: 0.14em;
 }
 
-a:hover {
-  color: #0b5b55;
+a:hover,
+a:focus-visible {
+  color: var(--link-hover);
   text-decoration-color: rgba(15, 118, 110, 0.6);
 }
 
@@ -644,12 +648,12 @@ a:hover {
 }
 
 .post-link-list a {
-  color: var(--ink);
+  color: var(--link);
   text-decoration: none;
 }
 
 .post-link-list a:hover {
-  color: var(--accent);
+  color: var(--link-hover);
 }
 
 .post-link-list time {
@@ -713,12 +717,12 @@ a:hover {
 }
 
 .taxonomy-posts a {
-  color: var(--ink);
+  color: var(--link);
   text-decoration: none;
 }
 
 .taxonomy-posts a:hover {
-  color: var(--accent);
+  color: var(--link-hover);
 }
 
 .post-content,

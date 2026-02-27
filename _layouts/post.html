@@ -2,13 +2,12 @@
 layout: default
 ---
 {%- assign date_format = site.minima.date_format | default: "%Y-%m-%d" -%}
-{%- assign plain_text = content | strip_html | strip_newlines | replace: " ", "" | replace: "	", "" -%}
+{%- assign plain_text = content | strip_html | strip_newlines | replace: " ", "" | replace: " ", "" -%}
 {%- assign char_count = plain_text | size -%}
 {%- assign reading_minutes = char_count | plus: 399 | divided_by: 400 -%}
-{%- if reading_minutes < 1 -%}{%- assign reading_minutes = 1 -%}{%- endif -%}
-{%- assign category_count = page.categories | size -%}
-{%- assign tag_count = page.tags | size -%}
-<article class="post h-entry" id="top" itemscope itemtype="http://schema.org/BlogPosting">
+{%- if reading_minutes < 1 -%}{%- assign reading_minutes=1 -%}{%- endif -%} {%- assign category_count=page.categories |
+  size -%} {%- assign tag_count=page.tags | size -%} <article class="post h-entry" id="top" itemscope
+  itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
     <div class="post-head-grid">
       <div class="post-head-main">
@@ -21,33 +20,33 @@ layout: default
             </time>
           </span>
           {%- if page.author -%}
-            <span class="meta-sep">·</span>
-            <span class="post-meta-item" itemprop="author" itemscope itemtype="http://schema.org/Person">
-              <span class="p-author h-card" itemprop="name">{{ page.author }}</span>
-            </span>
+          <span class="meta-sep">·</span>
+          <span class="post-meta-item" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">{{ page.author }}</span>
+          </span>
           {%- endif -%}
           <span class="meta-sep">·</span>
           <span class="post-meta-item">{{ reading_minutes }} 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span class="post-meta-item">约 {{ char_count }} 字符</span>
           {%- if page.updated -%}
-            <span class="meta-sep">·</span>
-            <span class="post-meta-item">更新于 {{ page.updated | date: date_format }}</span>
+          <span class="meta-sep">·</span>
+          <span class="post-meta-item">更新于 {{ page.updated | date: date_format }}</span>
           {%- endif -%}
         </p>
         {%- if page.description -%}
-          <p class="post-description">{{ page.description }}</p>
+        <p class="post-description">{{ page.description }}</p>
         {%- endif -%}
 
         {%- if category_count > 0 or tag_count > 0 -%}
-          <div class="post-taxonomy" aria-label="文章分类与标签">
-            {%- for category in page.categories -%}
-              <span class="meta-chip meta-chip--accent">分类 · {{ category }}</span>
-            {%- endfor -%}
-            {%- for tag in page.tags -%}
-              <span class="meta-chip meta-chip--warm">#{{ tag }}</span>
-            {%- endfor -%}
-          </div>
+        <div class="post-taxonomy" aria-label="文章分类与标签">
+          {%- for category in page.categories -%}
+          <span class="meta-chip meta-chip--accent">分类 · {{ category }}</span>
+          {%- endfor -%}
+          {%- for tag in page.tags -%}
+          <span class="meta-chip meta-chip--warm">#{{ tag }}</span>
+          {%- endfor -%}
+        </div>
         {%- endif -%}
       </div>
 
@@ -85,12 +84,13 @@ layout: default
     </div>
 
     {%- if page.cover -%}
-      <figure class="post-cover">
-        <img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title | escape }}" itemprop="image">
-        {%- if page.cover_caption -%}
-          <figcaption>{{ page.cover_caption }}</figcaption>
-        {%- endif -%}
-      </figure>
+    <figure class="post-cover">
+      <img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title | escape }}"
+        itemprop="image">
+      {%- if page.cover_caption -%}
+      <figcaption>{{ page.cover_caption }}</figcaption>
+      {%- endif -%}
+    </figure>
     {%- endif -%}
   </header>
 
@@ -112,35 +112,48 @@ layout: default
     </section>
 
     {%- if page.previous or page.next -%}
-      <nav class="post-neighbors" aria-label="相邻文章导航">
-        {%- if page.previous -%}
-          <a class="neighbor-card" href="{{ page.previous.url | relative_url }}">
-            <span class="neighbor-card__label">上一篇</span>
-            <strong class="neighbor-card__title">{{ page.previous.title }}</strong>
-            <span class="neighbor-card__meta">{{ page.previous.date | date: date_format }}</span>
-          </a>
-        {%- else -%}
-          <div class="neighbor-card neighbor-card--empty" aria-hidden="true">
-            <span class="neighbor-card__label">上一篇</span>
-            <strong class="neighbor-card__title">暂无</strong>
-          </div>
-        {%- endif -%}
+    <nav class="post-neighbors" aria-label="相邻文章导航">
+      {%- if page.previous -%}
+      <a class="neighbor-card" href="{{ page.previous.url | relative_url }}">
+        <span class="neighbor-card__label">上一篇</span>
+        <strong class="neighbor-card__title">{{ page.previous.title }}</strong>
+        <span class="neighbor-card__meta">{{ page.previous.date | date: date_format }}</span>
+      </a>
+      {%- else -%}
+      <div class="neighbor-card neighbor-card--empty" aria-hidden="true">
+        <span class="neighbor-card__label">上一篇</span>
+        <strong class="neighbor-card__title">暂无</strong>
+      </div>
+      {%- endif -%}
 
-        {%- if page.next -%}
-          <a class="neighbor-card neighbor-card--next" href="{{ page.next.url | relative_url }}">
-            <span class="neighbor-card__label">下一篇</span>
-            <strong class="neighbor-card__title">{{ page.next.title }}</strong>
-            <span class="neighbor-card__meta">{{ page.next.date | date: date_format }}</span>
-          </a>
-        {%- else -%}
-          <div class="neighbor-card neighbor-card--empty" aria-hidden="true">
-            <span class="neighbor-card__label">下一篇</span>
-            <strong class="neighbor-card__title">暂无</strong>
-          </div>
-        {%- endif -%}
-      </nav>
+      {%- if page.next -%}
+      <a class="neighbor-card neighbor-card--next" href="{{ page.next.url | relative_url }}">
+        <span class="neighbor-card__label">下一篇</span>
+        <strong class="neighbor-card__title">{{ page.next.title }}</strong>
+        <span class="neighbor-card__meta">{{ page.next.date | date: date_format }}</span>
+      </a>
+      {%- else -%}
+      <div class="neighbor-card neighbor-card--empty" aria-hidden="true">
+        <span class="neighbor-card__label">下一篇</span>
+        <strong class="neighbor-card__title">暂无</strong>
+      </div>
+      {%- endif -%}
+    </nav>
     {%- endif -%}
   </footer>
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
-</article>
+  </article>
+
+  <script>
+    (function () {
+      var links = document.querySelectorAll('.post-content a');
+      for (var i = 0; i < links.length; i++) {
+        var link = links[i];
+        if (link.hostname !== window.location.hostname) {
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+        }
+      }
+    })();
+  </script>
