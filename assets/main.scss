@@ -584,11 +584,15 @@ a:focus-visible {
 }
 
 .stats-overview {
-  margin-top: 0.9rem;
+  margin-top: 1.2rem;
+}
+
+.home .post-list+.stats-overview {
+  margin-top: clamp(1.4rem, 2.4vw, 2rem);
 }
 
 .stats-overview h2 {
-  margin: 0 0 0.65rem;
+  margin: 0 0 0.75rem;
   font-size: 1rem;
 }
 
@@ -1062,7 +1066,7 @@ a:focus-visible {
   }
 
   .stat-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .post-facts-card {
