@@ -33,3 +33,5 @@ defaults:
 
 exclude:
   - README.md
+  - vendor
+  - .bundle
