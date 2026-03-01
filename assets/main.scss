@@ -583,6 +583,15 @@ a:focus-visible {
   padding: 1rem;
 }
 
+.stats-overview {
+  margin-top: 0.9rem;
+}
+
+.stats-overview h2 {
+  margin: 0 0 0.65rem;
+  font-size: 1rem;
+}
+
 .archive-summary {
   display: grid;
   grid-template-columns: 1.2fr 1fr;

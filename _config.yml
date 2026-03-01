@@ -24,6 +24,10 @@ header_pages:
 show_excerpts: true
 permalink: /:year/:month/:day/:title/
 
+analytics:
+  busuanzi:
+    enabled: true
+
 defaults:
   - scope:
       path: ""
